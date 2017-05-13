@@ -15,6 +15,9 @@ docker-compose up
 Then connect to your service through tor. You'll see a hello world message if it
 has worked.
 
+Using docker-compose in production probably isn't advisable. You probably want 
+to use Deis, Kubernetes, Docker Swarm or similar to deploy it for real.
+
 ## Environment Variables
 
 * `TOR_PORT=80` Port to expose the service on inside tor
