@@ -1,0 +1,14 @@
+version: '3.0'
+
+services:
+  hello-world:
+    image: crccheck/hello-world
+  tor:
+    build: .
+    depends_on:
+      - hello-world
+    environment:
+      - TOR_PORT=80
+      - SERVICE_URI=hello-world:8000
+      - PRIVATE_KEY
+      - HOSTNAME

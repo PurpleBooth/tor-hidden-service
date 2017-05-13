@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+if [ $# -ne 0 ] ; then
+    exec $@
+fi
+
+set -euo pipefail
+
+envsubst < "/torrc.template" > "${TOR_HOME}/torrc"
+
+mkdir -p "${TOR_HOME}/hidden_service/"
+echo "${PRIVATE_KEY}" > "${TOR_HOME}/hidden_service/private_key"
+echo "${HOSTNAME}" > "${TOR_HOME}/hidden_service/hostname"
+
+chmod -R 700 "${TOR_HOME}/hidden_service/"
+
+
+exec tor -f "${TOR_HOME}/torrc"
