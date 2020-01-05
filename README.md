@@ -1,7 +1,7 @@
 # Tor Hidden Service Docker Container
 
 Simple container to make a service available over tor. This is not a minimal
-container, rather being built onto of Ubuntu xenial so we can use the official
+container, rather being built onto of Ubuntu bionic so we can use the official
 packages and repository for tor.
 
 ## Running
