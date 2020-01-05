@@ -1,0 +1,54 @@
+
+on:
+  push:
+    # Sequence of patterns matched against refs/tags
+    tags:
+      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+
+name: Release
+
+jobs:
+  github-docker-build-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+      - uses: elgohr/Publish-Docker-Github-Action@master
+        with:
+          name: purplebooth/tor-hidden-service/tor-hidden-service
+          username: PurpleBooth
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: docker.pkg.github.com
+          tag_names: true
+  github-docker-build-latest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+      - uses: elgohr/Publish-Docker-Github-Action@master
+        with:
+          name: purplebooth/tor-hidden-service/tor-hidden-service
+          username: PurpleBooth
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: docker.pkg.github.com
+  docker-hub-docker-build-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+      - uses: elgohr/Publish-Docker-Github-Action@master
+        with:
+          name: purplebooth/tor-hidden-service
+          username: purplebooth
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+          tag_names: true
+  docker-hub-docker-build-latest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+      - uses: elgohr/Publish-Docker-Github-Action@master
+        with:
+          name: purplebooth/readable-name-generator
+          username: purplebooth
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}

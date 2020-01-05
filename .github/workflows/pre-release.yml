@@ -1,0 +1,29 @@
+on:
+  push:
+    branches:
+      - master
+name: Pre-Release
+jobs:
+  github-docker-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+      - uses: elgohr/Publish-Docker-Github-Action@master
+        with:
+          name: purplebooth/tor-hidden-service/tor-hidden-service
+          username: PurpleBooth
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: docker.pkg.github.com
+          snapshot: true
+  docker-hub-docker-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+      - uses: elgohr/Publish-Docker-Github-Action@master
+        with:
+          name: purplebooth/tor-hidden-service
+          username: purplebooth
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+          snapshot: true
